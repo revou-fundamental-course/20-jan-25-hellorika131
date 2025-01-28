@@ -13,6 +13,8 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 0 auto;
 }
 
 h1 {
@@ -44,8 +46,17 @@ button {
     border-radius: 5px;
     background-color: #007BFF;
     color: white;
+    padding: 15px;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+#result {
+    width: 100%;
+    text-align: right;
+    padding: 10px;
+    font-size: 24px;
+    box-sizing: border-box;
 }

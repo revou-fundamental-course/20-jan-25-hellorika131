@@ -1,16 +1,100 @@
+let result = '';
+
 function appendToResult(value) {
-    document.getElementById('result').value += value;
+    result += value;
+    updateDisplay();
+}
+
+function updateDisplay() {
+    document.getElementById('result').value = result;
 }
 
 function clearResult() {
-    document.getElementById('result').value = '';
+    result = '';
+    updateDisplay();
+}
+
+function deleteLastCharacter() {
+    result = result.slice(0, -1);
+    updateDisplay();
 }
 
 function calculateResult() {
-    const resultField = document.getElementById('result');
     try {
-        resultField.value = eval(resultField.value);
+        console.log("Input expression:", result);
+
+        if (result.trim() === '') {
+            result = 'Error';
+            console.log("Empty input, setting result to 'Error'");
+        } else {
+            const calculated = evaluateExpression(result);
+            console.log("Calculated result:", calculated);
+
+            if (isNaN(calculated)) {
+                throw new Error("Invalid calculation result");
+            }
+            result = calculated.toString();
+        }
     } catch (error) {
-        resultField.value = 'Error';
+        console.log("Error encountered:", error.message);
+        result = 'Error';
     }
+    updateDisplay();
+}
+
+function evaluateExpression(expr) {
+    console.log("Evaluating expression:", expr);
+
+    const numbers = expr.split(/[\+\-\*\/%]/).map(Number);
+    console.log("Numbers:", numbers); 
+
+    const operators = expr.match(/[\+\-\*\/%]/g) || [];
+    console.log("Operators:", operators); 
+
+    if (numbers.length === 0 || operators.length === 0) {
+        console.log("Invalid expression, returning 0");
+        return 0;
+    }
+
+    for (let i = 0; i < operators.length; i++) {
+        if (operators[i] === '%') {
+            console.log(`Processing % between ${numbers[i]} and ${numbers[i + 1]}`);
+            numbers[i] = numbers[i] % numbers[i + 1];
+            numbers.splice(i + 1, 1);
+            operators.splice(i, 1);
+            i--;
+        }
+    }
+
+    let total = numbers[0];
+    console.log("Initial total:", total);
+
+    for (let i = 0; i < operators.length; i++) {
+        const operator = operators[i];
+        const nextNumber = numbers[i + 1];
+
+        console.log(`Processing ${operator} between ${total} and ${nextNumber}`);
+
+        switch (operator) {
+            case '+':
+                total += nextNumber;
+                break;
+            case '-':
+                total -= nextNumber;
+                break;
+            case '*':
+                total *= nextNumber;
+                break;
+            case '/':
+                if (nextNumber === 0) throw new Error("Division by zero");
+                total /= nextNumber;
+                break;
+            case '%':
+                total %= nextNumber;
+                break;
+        }
+    }
+
+    console.log("Total after calculation:", total);
+    return total;
 }

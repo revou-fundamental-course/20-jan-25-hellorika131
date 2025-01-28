@@ -8,8 +8,8 @@
 </head>
 <body>
     <div id="calculator">
-        <input id="Display" readonly>
-        <div class="keys">
+        <input id="display" type="text" disabled />
+        <div id="keys">
             <button onclick="clearDisplay()" class="operator-btn">C</button>
             <button onclick="deleteLastCharacter()">Del</button>
             <button onclick="appendToDisplay('+/-')">+/-</button>
@@ -23,7 +23,7 @@
             <button onclick="appendToDisplay('4')">4</button>
             <button onclick="appendToDisplay('5')">5</button>
             <button onclick="appendToDisplay('6')">6</button>
-            <button onclick="appendToDisplay('-')" class="operator-btn">+</button>
+            <button onclick="appendToDisplay('-')" class="operator-btn">-</button>
         
             <button onclick="appendToDisplay('1')">1</button>
             <button onclick="appendToDisplay('2')">2</button>

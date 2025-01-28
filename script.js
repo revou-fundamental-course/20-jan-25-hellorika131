@@ -1,107 +1,40 @@
-let result = '';
+const display = document.getElementById("display");
 
-function appendToResult(value) {
-    result += value;
-    updateDisplay();
+// Fungsi untuk menambahkan angka atau operator ke display
+function appendToDisplay(input) {
+    if (input === '+/-') {
+        // Mengubah tanda angka terakhir jika ada
+        if (display.value && !isNaN(display.value[display.value.length - 1])) {
+            display.value = display.value[0] === '-' ? display.value.slice(1) : '-' + display.value;
+        }
+    } else {
+        display.value += input;  // Menambahkan input ke display
+    }
 }
 
-function updateDisplay() {
-    document.getElementById('result').value = result;
+// Fungsi untuk menghapus semua angka pada display
+function clearDisplay() {
+    display.value = "";
 }
 
-function clearResult() {
-    result = '';
-    updateDisplay();
-}
-
+// Fungsi untuk menghapus karakter terakhir pada display
 function deleteLastCharacter() {
-    result = result.slice(0, -1);
-    updateDisplay();
+    display.value = display.value.slice(0, -1);
 }
 
-function calculateResult() {
+// Fungsi untuk menghitung hasil dari ekspresi pada display
+function calculateDisplay() {
     try {
-        console.log("Input expression:", result);
-
-        if (result.trim() === '') {
-            result = 'Error';
-            console.log("Empty input, setting result to 'Error'");
-        } else {
-            const calculated = evaluateExpression(result);
-            console.log("Calculated result:", calculated);
-
-            if (isNaN(calculated)) {
-                throw new Error("Invalid calculation result");
-            }
-            result = calculated.toString();
+        // Menangani % sebagai persentase dari angka terakhir
+        let expression = display.value;
+        if (expression.includes('%')) {
+            // Misalnya 20% akan dihitung sebagai 20/100
+            expression = expression.replace(/(\d+)%/g, (match, p1) => p1 / 100);
         }
+
+        // Menilai ekspresi matematika menggunakan eval()
+        display.value = eval(expression);
     } catch (error) {
-        console.log("Error encountered:", error.message);
-        result = 'Error';
+        display.value = "Error";  // Menampilkan "Error" jika ada masalah dengan ekspresi
     }
-    updateDisplay();
-}
-
-function evaluateExpression(expr) {
-    console.log("Evaluating expression:", expr);
-
-    let numbers = expr.split(/(?=[\+\-\*\/%])/).map(Number); 
-    console.log("Numbers:", numbers);
-
-    const operators = expr.match(/[\+\-\*\/%]/g) || [];
-    console.log("Operators:", operators);
-
-    if (numbers.length === 0 || operators.length === 0) {
-        console.log("Invalid expression, returning 0");
-        return 0;
-    }
-
-    for (let i = 0; i < operators.length; i++) {
-        if (operators[i] === '%') {
-            console.log(`Processing % between ${numbers[i]} and ${numbers[i + 1]}`);
-            numbers[i] = numbers[i] % numbers[i + 1];
-            numbers.splice(i + 1, 1);
-            operators.splice(i, 1);
-            i--;
-        }
-    }
-
-    for (let i = 0; i < operators.length; i++) {
-        if (operators[i] === '*' || operators[i] === '/') {
-            const operator = operators[i];
-            console.log(`Processing ${operator} between ${numbers[i]} and ${numbers[i + 1]}`);
-            
-            if (operator === '*') {
-                numbers[i] = numbers[i] * numbers[i + 1];
-            } else if (operator === '/') {
-                if (numbers[i + 1] === 0) throw new Error("Division by zero");
-                numbers[i] = numbers[i] / numbers[i + 1];
-            }
-            numbers.splice(i + 1, 1);
-            operators.splice(i, 1);
-            i--;
-        }
-    }
-
-    let total = numbers[0];
-    console.log("Initial total:", total);
-
-    for (let i = 0; i < operators.length; i++) {
-        const operator = operators[i];
-        const nextNumber = numbers[i + 1];
-
-        console.log(`Processing ${operator} between ${total} and ${nextNumber}`);
-
-        switch (operator) {
-            case '+':
-                total += nextNumber;
-                break;
-            case '-':
-                total -= nextNumber;
-                break;
-        }
-    }
-
-    console.log("Total after calculation:", total);
-    return total;
 }

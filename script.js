@@ -45,11 +45,11 @@ function calculateResult() {
 function evaluateExpression(expr) {
     console.log("Evaluating expression:", expr);
 
-    const numbers = expr.split(/[\+\-\*\/%]/).map(Number);
-    console.log("Numbers:", numbers); 
+    let numbers = expr.split(/(?=[\+\-\*\/%])/).map(Number); 
+    console.log("Numbers:", numbers);
 
     const operators = expr.match(/[\+\-\*\/%]/g) || [];
-    console.log("Operators:", operators); 
+    console.log("Operators:", operators);
 
     if (numbers.length === 0 || operators.length === 0) {
         console.log("Invalid expression, returning 0");
@@ -60,6 +60,23 @@ function evaluateExpression(expr) {
         if (operators[i] === '%') {
             console.log(`Processing % between ${numbers[i]} and ${numbers[i + 1]}`);
             numbers[i] = numbers[i] % numbers[i + 1];
+            numbers.splice(i + 1, 1);
+            operators.splice(i, 1);
+            i--;
+        }
+    }
+
+    for (let i = 0; i < operators.length; i++) {
+        if (operators[i] === '*' || operators[i] === '/') {
+            const operator = operators[i];
+            console.log(`Processing ${operator} between ${numbers[i]} and ${numbers[i + 1]}`);
+            
+            if (operator === '*') {
+                numbers[i] = numbers[i] * numbers[i + 1];
+            } else if (operator === '/') {
+                if (numbers[i + 1] === 0) throw new Error("Division by zero");
+                numbers[i] = numbers[i] / numbers[i + 1];
+            }
             numbers.splice(i + 1, 1);
             operators.splice(i, 1);
             i--;
@@ -81,16 +98,6 @@ function evaluateExpression(expr) {
                 break;
             case '-':
                 total -= nextNumber;
-                break;
-            case '*':
-                total *= nextNumber;
-                break;
-            case '/':
-                if (nextNumber === 0) throw new Error("Division by zero");
-                total /= nextNumber;
-                break;
-            case '%':
-                total %= nextNumber;
                 break;
         }
     }

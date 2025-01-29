@@ -1,68 +1,100 @@
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: white; 
-}
-
-#calculator {
     font-family: Arial, sans-serif;
-    background-color: hsl(0, 0%, 20%); 
-    border-radius: 15px;
-    max-width: 400px; 
-    width: 100%;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
-    border: 2px solid hsl(0, 0%, 50%); 
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
-#display {
-    width: 100%;
-    text-align: left;
+.container {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
     padding: 20px;
-    font-size: 2rem;
-    border: none;
-    background-color: hsl(0, 0%, 25%); 
-    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#keys {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px; 
-    padding: 20px;
+h2 {
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left ;
+}
+
+.input-group label {
+    font-weight: bold;
+    display: block ;
+    padding: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px 4px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    max-width: 390px; 
+    margin: 0 auto;   
 }
 
 button {
-    width: 80px; 
-    height: 80px; 
-    border-radius: 50%; 
-    border: none;
-    background-color: hsl(0, 0%, 30%);
-    font-size: 1.5rem; 
-    color: white;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
     font-weight: bold;
+    color: white;
+    background: #28a745;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: hsl(0, 0%, 40%);
+    background: #218838;
 }
 
-button:active {
-    background-color: hsl(0, 0%, 50%);
+.reset-button {
+    background: #dc3545;
 }
 
-.operator-btn {
-    background-color: hsl(35, 100%, 55%);
+.reset-button:hover {
+    background: #c82333;
 }
 
-.operator-btn:hover {
-    background-color: hsl(35, 100%, 65%);
+/* Kotak hasil BMI */
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    background: #e9ecef;
 }
 
-.operator-btn:active {
-    background-color: hsl(35, 100%, 75%);
+/* Warna hasil BMI */
+.underweight {
+    color: #ff9800;
+}
+
+.normal {
+    color: #4caf50;
+}
+
+.overweight {
+    color: #ff5722;
+}
+
+.obese {
+    color: #d32f2f;
+}
+
+/* Responsif */
+@media (max-width: 500px) {
+    .container {
+        width: 95%;
+    }
 }

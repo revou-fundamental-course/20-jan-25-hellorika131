@@ -1,100 +1,111 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
-    margin: 0;
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --kurang: orange;
+    --normal: green;
+    --berlebih: lightcoral;
+    --obesitas: crimson;
+}
+
+* {
+    box-sizing: border-box;
     padding: 0;
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+}
+
+body {
+    background: #004d4d;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
 }
 
 .container {
-    background: white;
     width: 90%;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
+    max-width: 420px;
+    background: #fff;
+    padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
+    display: grid;
+    gap: 1rem;
 }
 
-h2 {
-    color: #333;
+.calculator {
+    display: grid;
+    gap: 1rem;
 }
 
-.input-group {
-    margin-bottom: 20px;
-    text-align: left ;
+.calculator div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-.input-group label {
-    font-weight: bold;
-    display: block ;
-    padding: 5px;
+.calculator label {
+    flex: 0 1 120px;
+    font-weight: 600;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 8px 4px; 
-    border: 1px solid #ccc;
+.calculator input {
+ flex: 1;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ padding: 10px;
+ outline-color: #555;
+ font-size: 1.25rem;
+ text-align: center;
+}
+
+.calculator button {
+    width: 50%;
     border-radius: 5px;
-    font-size: 16px;
-    max-width: 390px; 
-    margin: 0 auto;   
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background: #28a745;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    padding: 10px;
+    background: #00a1a3;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-button:hover {
-    background: #218838;
+.calculator button [type="reset"] {
+    background: #444;
 }
 
-.reset-button {
-    background: #dc3545;
+.calculator button:hover {
+    filter: brightness(120%);
 }
 
-.reset-button:hover {
-    background: #c82333;
+.output {
+    text-align: center;
 }
 
-/* Kotak hasil BMI */
-.result-box {
-    margin-top: 20px;
-    padding: 15px;
-    font-size: 18px;
-    border-radius: 5px;
-    background: #e9ecef;
+.output #bmi {
+    font-size: 4rem;
 }
 
-/* Warna hasil BMI */
-.underweight {
-    color: #ff9800;
+.output #desc strong {
+    text-transform: uppercase;
 }
 
-.normal {
-    color: #4caf50;
+.bmi-scale {
+    display: flex;
 }
 
-.overweight {
-    color: #ff5722;
+.bmi-scale div {
+    flex: 1;
+    text-align: center;
+    text-transform: uppercase;
+    border-top: 5px solid var(--color);
 }
 
-.obese {
-    color: #d32f2f;
-}
-
-/* Responsif */
-@media (max-width: 500px) {
-    .container {
-        width: 95%;
-    }
+.bmi-scale h4 {
+    font-size: 0.75rem;
+    color: darkslategray;
 }

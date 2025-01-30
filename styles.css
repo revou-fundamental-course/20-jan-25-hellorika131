@@ -2,7 +2,7 @@
 
 :root {
     --kurang: orange;
-    --normal: green;
+    --normal: dodgerblue;
     --berlebih: lightcoral;
     --obesitas: crimson;
 }
@@ -15,7 +15,7 @@
 }
 
 body {
-    background: #004d4d;
+    background: #004080;
     display: grid;
     place-items: center;
     height: 100vh;
@@ -68,14 +68,14 @@ h1 {
     border: none;
     cursor: pointer;
     padding: 10px;
-    background: #00a1a3;
+    background: rgb(10, 111, 199);
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.calculator button [type="reset"] {
-    background: #444;
+button[type="reset"] {
+    background: lightslategray;
 }
 
 .calculator button:hover {
@@ -108,4 +108,20 @@ h1 {
 .bmi-scale h4 {
     font-size: 0.75rem;
     color: darkslategray;
+}
+
+.Kurang { 
+    color: var(--kurang); 
+}
+
+.Normal { 
+    color: var(--normal); 
+}
+
+.Berlebih { 
+    color: var(--berlebih); 
+}
+
+.Obesitas { 
+    color: var(--obesitas); 
 }
